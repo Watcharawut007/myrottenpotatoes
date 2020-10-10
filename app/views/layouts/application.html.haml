@@ -5,13 +5,17 @@
     = stylesheet_link_tag 'application'
     = javascript_pack_tag 'application'
     = csrf_meta_tags
+    %script(src="app/assets/javascripts/application.js")
+    <script src="/assets/javascripts/application.js" ></script>
 
   %body
+    
     %Bigban= link_to 'RottenPotatoes', movies_path
     - if flash[:notice]
       #notice.message= flash[:notice]
     - elsif flash[:warning]
       #warning.message= flash[:warning]
+
     #login
     - if @current_user
       %p.welcome  Welcome, #{@current_user.name}!
