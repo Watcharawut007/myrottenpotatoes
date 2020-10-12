@@ -4,8 +4,6 @@ class Movie < ActiveRecord::Base
     Movie.joins(:reviews).group(:movie_id).
       having(['AVG(reviews.potatoes) > ?', threshold.to_i])
     }
-    scope :for_kids, lambda {
-        Movie.where('rating in (?)', %w(G PG))
-    }
+    
   
 end

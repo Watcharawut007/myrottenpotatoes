@@ -44,4 +44,5 @@ var MoviePopup = {
       return(false);
     }
   };
-  $(MoviePopup.setup);
+
+$(MoviePopup.setup);

@@ -8,4 +8,5 @@ Myrottenpotatoes::Application.routes.draw do
   post 'logout' => 'sessions#destroy'
   get  'auth/failure' => 'sessions#failure'
   get  'auth/twitter', :as => 'login'
+  post 'search/:data' => 'movies#tmdb_search'
 end

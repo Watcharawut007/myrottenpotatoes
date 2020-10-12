@@ -1,4 +1,4 @@
-<script src="/assets/javascripts/movie_popup.js" ></script>
+
 %h1 All Movies
 
 %table#movies
@@ -19,3 +19,20 @@
       %td= link_to "More about #{movie.title}", movie_path(movie)
       
 = link_to 'Add new movie', new_movie_path
+<button id='button1' class="btn btn-primary primary-button" type="subimt">Submit</button>
+= form_tag movie_path(@movie), :method => :put do
+
+  = label :movie, :title, 'Title'
+  = text_field :movie, 'title'
+
+  = label :movie, :rating, 'Rating'
+  = select :movie, :rating, ['G','PG','PG-13','R','NC-17']
+
+  = label :movie, :release_date, 'Released On'
+  = date_select :movie, :release_date, start_year: 1930
+
+  = label :movie, :description, 'Description'
+  = text_field :movie, :description
+
+  = submit_tag 'Save Changes'
+  = link_to 'Cancel', movie_path(@movie)

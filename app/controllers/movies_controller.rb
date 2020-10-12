@@ -1,5 +1,6 @@
 class MoviesController < ApplicationController
   skip_before_action :authenticate!, only: [ :show, :index ]
+  
   def index
     @movies = Movie.all.order('title')
   end
@@ -47,5 +48,12 @@ class MoviesController < ApplicationController
     @movies = @movies.for_kids          if params[:for_kids]
     @movies = @movies.with_many_fans    if params[:with_many_fans]
     @movies = @movies.recently_reviewed if params[:recently_reviewed]
+  end
+
+  def tmdb_search
+    @search = Tmdb::Search.new
+    @search.resource('movie') # determines type of resource
+    @search.query('batman') # the query to search against
+    @search.fetch # makes request
   end
 end
