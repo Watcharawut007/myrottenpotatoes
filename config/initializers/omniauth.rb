@@ -1,4 +1,4 @@
 # Replace API_KEY and API_SECRET with the values you got from Twitter
 Rails.application.config.middleware.use OmniAuth::Builder do
-    provider :twitter, "hGohyULwIfBINYvUcZMZd1lwC", "ZURlDASAdCLAD6Z9kx9e3L948qpg0IaoeyB3MDa64kmXcbFeR5"
+    provider :twitter, "Dgj5yyElQwQhRs2jCsL9YcHA1", "PxzXlFpYRYThSjcdEzjEyOHbBL1yLKcON9MaRNn0NVivwqu8z4"
 end
