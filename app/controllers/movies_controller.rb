@@ -50,10 +50,17 @@ class MoviesController < ApplicationController
     @movies = @movies.recently_reviewed if params[:recently_reviewed]
   end
 
-  def tmdb_search
-    @search = Tmdb::Search.new
-    @search.resource('movie') # determines type of resource
-    @search.query('batman') # the query to search against
-    @search.fetch # makes request
+  def search_tmdb
+    @serach_params = params[:search_terms]
+    @search = Tmdb::Movie.find(@serach_params)
+    if @search
+      render "search"
+    else
+      flash[:warning] = "'#{params[:search_terms]}' was not found in TMDb."
+      redirect_to movies_path
+  
+    end
   end
+
+  
 end
