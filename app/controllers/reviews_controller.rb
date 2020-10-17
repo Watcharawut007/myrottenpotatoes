@@ -1,4 +1,5 @@
 class ReviewsController < ApplicationController
+    skip_before_action :authenticate!, only: [ :new ]
     before_action :has_moviegoer_and_movie, :only => [:new, :create , :edit, :update , :destroy]
     
     protected
@@ -14,7 +15,13 @@ class ReviewsController < ApplicationController
     end
     public
     def new
-      @review = @movie.reviews.build
+      if set_current_user
+        @review = @movie.reviews.build
+      else
+        flash[:warning] = "Please log in before create review action"
+        redirect_to movies_path
+      end
+
     end
     def create
       # since moviegoer_id is a protected attribute that won't get

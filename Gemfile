@@ -10,9 +10,9 @@ group :production do
   gem 'pg'
 end
 
-#group :development do
-  #gem 'sqlite3', '~> 1.4'
-#end
+group :development do
+  gem 'sqlite3', '~> 1.4'
+end
 
 gem 'pg'
 # Use Puma as the app server
@@ -49,9 +49,24 @@ group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '~> 3.2'
+  gem 'factory_girl_rails' 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+end
+group :test do
+gem 'rspec-rails'
+gem 'guard-rspec'
+gem 'simplecov', :require => false
+gem 'cucumber-rails', :require => false
+gem 'cucumber-rails-training-wheels' # basic imperative step defs
+gem 'database_cleaner' # required by Cucumber
+gem 'factory_girl_rails' # if using FactoryGirl
+gem 'metric_fu'        # collect code metrics
+end
+gem 'rails-controller-testing'
+group :development, :test do
+  gem 'rspec-rails'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
