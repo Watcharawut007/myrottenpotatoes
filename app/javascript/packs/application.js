@@ -10,6 +10,7 @@ require("channels")
 require("jquery")
 require("bootstrap")
 require("packs/custom") // Here is my custom jQuery file like packs/custom.
+require("packs/movie_filter")
 
 var MoviePopup = {
     setup: function() {

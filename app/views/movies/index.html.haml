@@ -1,12 +1,11 @@
 
-%h1 All Movies
-
 %h1 Search TMDb for a movie
 
 = form_tag :action => 'search_tmdb' do
-  <label for='search_terms'>Search Terms</label>
   <input id="search_terms" name="search_terms" type="text" />
   = submit_tag 'Search TMDb'
+
+%h1{:style=>"border-bottom: 1px solid DarkSlateGrey;"}All Movies
 
 %table#movies
   %thead
@@ -17,14 +16,28 @@
       %th Release Date
       %th More Info
   %tbody
+    %label Rate filter :
+    %label{:for => "G_filter"}G
+    %input{:type=>"checkbox", :checked => true ,:id => "G_filter"}
+    %label{:for => "PG_filter"}PG
+    %input{:type=>"checkbox", :checked => true ,:id => "PG_filter"}
+    %label{:for => "PG-13_filter"}PG-13
+    %input{:type=>"checkbox", :checked => true ,:id => "PG-13_filter"}
+    %label{:for => "R_filter"}R
+    %input{:type=>"checkbox", :checked => true ,:id => "R_filter"}
+    %label{:for => "NC-17_filter"}NC-17
+    %input{:type=>"checkbox", :checked => true ,:id => "NC-17_filter"}
+    
+
     - @movies.each_with_index do |movie,index|
-      %tr
-      %td= index+1
-      %td= movie.title
-      %td= movie.rating
-      %td= movie.release_date
-      %td= link_to "More about #{movie.title}", movie_path(movie)
+      %tr{class: movie.rating}
+        %td= index+1
+        %td= movie.title
+        %td= movie.rating
+        -if movie.release_date
+          %td= movie.release_date.strftime("%B %d, %Y")
+        -else
+          %td= "-"
+        %td= link_to "More about #{movie.title}", movie_path(movie)
       
 = link_to 'Add new movie', new_movie_path
-
-

@@ -5,8 +5,7 @@
     = stylesheet_link_tag 'application'
     = javascript_pack_tag 'application'
     = csrf_meta_tags
-    %script(src="app/assets/javascripts/application.js")
-    <script src="/assets/javascripts/application.js" ></script>
+
 
   %body
     
@@ -18,10 +17,10 @@
 
     #login
     - if @current_user
-      %p.welcome  Welcome, #{@current_user.name}!
-      = link_to 'Log Out', logout_path, :method => :post
+      %p.welcome{:style=>"text-align:right;"}  Welcome, #{@current_user.name}!
+      %p{:style=>"text-align:right;"}= link_to 'Log Out', logout_path, :method => :post
     - else
-      %p.login= link_to 'Log in with your Twitter account', '/auth/twitter'
+      %p.login{:style=>"text-align:right;"}= link_to 'Log in with your Twitter account', '/auth/twitter' 
     #main
     
       = yield

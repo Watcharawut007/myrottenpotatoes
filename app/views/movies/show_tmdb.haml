@@ -1,0 +1,15 @@
+
+%h2 Details about #{@search.title}
+%ul#details
+  %li
+    Rating:
+    = @search.rating
+  %li
+    Released on:
+    = @search.release_date.strftime("%B %d, %Y")
+
+%h3 Description:
+%p#description= @search.description
+%h3 Reviews:
+
+= link_to 'Back to movie list', movies_path
