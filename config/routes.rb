@@ -10,5 +10,5 @@ Myrottenpotatoes::Application.routes.draw do
   get  'auth/twitter', :as => 'login'
   
   post '/movies/search_tmdb'
-  get '/show_tmdb/:id' => 'movie#show_tmdb' , :as => 'movies_show_tmdb'
+  post 'all_destroy' => 'movies#all_destroy' , :as => 'all_destroy'
 end

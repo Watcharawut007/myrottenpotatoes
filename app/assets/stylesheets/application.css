@@ -75,9 +75,10 @@ Bigban {
 }
 #movieInfo {
   padding: 10px;
-  position: absolute;
+  position: fixed;
   border: 2px double #a8d1e8;
   background: #fee5e0;
+  box-shadow: 0 2px 3px #666666;
 }
 img{
   height: 200px;

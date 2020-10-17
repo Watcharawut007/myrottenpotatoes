@@ -58,19 +58,31 @@ class MoviesController < ApplicationController
         redirect_to movies_path
       end
     end
+
+    def all_destroy
+      if set_current_user
+        Movie.destroy_all
+        flash[:notice] = "All Movie deleted."
+        redirect_to movies_path
+      else
+        flash[:warning] = "Please log in before destroy action"
+        redirect_to movies_path
+      end
+    end
+    def createall_from_movies(search_movie)
+      search_movie.each do |movie|
+        if Movie.exists?(:title => movie.title,:description => movie.overview) == false
+          permitted = {:title => movie.title,:rating =>"G" ,:release_date =>movie.release_date,:description => movie.overview}
+          Movie.create!(permitted)
+        end
+      end
+    end  
+
     def search_tmdb
       @search_params = params[:search_terms]
       @search_params = " " if @search_params  == ""
       @search = Tmdb::Movie.find(@search_params)
-      @search.each do |movie|
-        if Movie.exists?(:title => movie.title,:description => movie.overview) == false
-          permitted = {:title => movie.title,:rating =>"G" ,:release_date =>movie.release_date,:description => movie.overview}
-          @movie = Movie.create!(permitted)
-        end
-      end
-
-      #@search = Movie.find_in_tmdb(@search_params)
-      
+      createall_from_movies(@search)
       if @search != []
         render "search"
       else
@@ -78,6 +90,7 @@ class MoviesController < ApplicationController
         redirect_to movies_path
       end
     end
+    
     def show_tmdb
       id = params[:id] # retrieve movie ID from URI route
       @search = Tmdb::Movie.lists(id)

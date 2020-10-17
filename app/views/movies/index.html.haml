@@ -5,7 +5,7 @@
   <input id="search_terms" name="search_terms" type="text" />
   = submit_tag 'Search TMDb'
 
-%h1{:style=>"border-bottom: 1px solid DarkSlateGrey;"}All Movies
+%h1{:style => "border-bottom: 1px solid DarkSlateGrey;"}All Movies
 
 %table#movies
   %thead
@@ -39,5 +39,6 @@
         -else
           %td= "-"
         %td= link_to "More about #{movie.title}", movie_path(movie)
-      
-= link_to 'Add new movie', new_movie_path
+%div{class: "row"}      
+  %p{class: "column",:style=>"text-align:left;"}= link_to 'Add new movie', new_movie_path
+  %p{class: "column",:style=>"text-align:right;"}= link_to 'delete all movies', all_destroy_path , :method => "post"
