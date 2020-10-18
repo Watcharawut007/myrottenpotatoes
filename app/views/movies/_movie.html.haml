@@ -17,9 +17,11 @@
   %li
     Average potatoes:
 
-    - @movie.reviews.each do |review|
-      %tr
-      %td= review.potatoes
+    %tr
+    -if @sum !=0
+      %td= @sum
+    -else
+      %td No potatoes
 
   - @movie.reviews.each do |review|
     %tr

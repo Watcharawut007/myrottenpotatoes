@@ -52,7 +52,8 @@ table#movies th, table#movies td {
   text-align: left;
 }
 #notice, #warning {
-  background: rosybrown;
+  background:linear-gradient(90deg,  rgb(231, 61, 61) 35%, rgba(255,255,255,1) 100%);
+  color: white;
   margin: 1em 0;
   padding: 4px;
 }
@@ -68,8 +69,10 @@ Bigban {
   font-size: 72px;
   font-style: Bold;
   display: block;
+  padding-top: 20px;
   width: 100%;
-  
+  position: sticky;
+  top: 0;
   text-align: center;
   background: linear-gradient(90deg, #ffbfc3 35%, rgba(241,195,234,1) 62%, rgba(255,255,255,1) 100%);
 }
@@ -82,4 +85,12 @@ Bigban {
 }
 img{
   height: 200px;
+}
+.icon:hover {
+  filter: 
+    invert(0.5)
+    sepia(1)
+    hue-rotate(200deg)
+    saturate(4)
+    brightness(1);
 }

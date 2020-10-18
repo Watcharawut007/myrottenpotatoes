@@ -1,6 +1,6 @@
 class ReviewsController < ApplicationController
-    skip_before_action :authenticate!, only: [ :new ]
-    before_action :has_moviegoer_and_movie, :only => [:new, :create , :edit, :update , :destroy]
+  skip_before_action :authenticate!, only: [ :new ]
+  before_action :has_moviegoer_and_movie, :only => [:new, :create , :edit, :update , :destroy]
     
     protected
     def has_moviegoer_and_movie
@@ -13,7 +13,7 @@ class ReviewsController < ApplicationController
         redirect_to movies_path
       end
     end
-    public
+    
     def new
       if set_current_user
         @review = @movie.reviews.build

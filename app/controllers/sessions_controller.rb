@@ -13,4 +13,9 @@ class SessionsController < ApplicationController
       flash[:notice] = 'Logged out successfully.'
       redirect_to movies_path
     end
+    def failure
+      flash[:warning] = 'Logged in failed.'
+      redirect_to movies_path
+    end
+    
   end

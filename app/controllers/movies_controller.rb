@@ -1,5 +1,5 @@
 class MoviesController < ApplicationController
-  skip_before_action :authenticate!, only: [ :show, :index ,:search_tmdb ,:show_tmdb]
+  skip_before_action :authenticate!, only: [ :show, :index ,:search_tmdb ,:show_tmdb ,:new ,:all_destroy ,:edit ,:destroy]
     def index
       @movies = Movie.all.order('title')
     end
@@ -7,6 +7,11 @@ class MoviesController < ApplicationController
     def show
       id = params[:id] # retrieve movie ID from URI route
       @movie = Movie.find(id) # look up movie by unique ID
+      @sum=0
+      @movie.reviews.all.each do |review|
+        @sum = @sum+review.potatoes
+      end
+      @sum=@sum/@movie.reviews.count if @movie.reviews.count != 0
       render(:partial => 'movie', :object => @movie) if request.xhr?
       # will render app/views/movies/show.html.haml by default
     end

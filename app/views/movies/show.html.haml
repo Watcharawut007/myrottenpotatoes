@@ -16,9 +16,8 @@
   %li
     Average potatoes:
 
-    - @movie.reviews.each do |review|
-      %tr
-      %td= review.potatoes
+    %tr
+    %td= @sum
 
   - @movie.reviews.each do |review|
     %tr

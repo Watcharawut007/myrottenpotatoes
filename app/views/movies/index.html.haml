@@ -9,26 +9,28 @@
 
 %table#movies
   %thead
-    %tr
-      %th Index
-      %th Movie Title
-      %th Rating
-      %th Release Date
-      %th More Info
+  
   %tbody
-    %label Rate filter :
-    %label{:for => "G_filter"}G
-    %input{:type=>"checkbox", :checked => true ,:id => "G_filter"}
-    %label{:for => "PG_filter"}PG
-    %input{:type=>"checkbox", :checked => true ,:id => "PG_filter"}
-    %label{:for => "PG-13_filter"}PG-13
-    %input{:type=>"checkbox", :checked => true ,:id => "PG-13_filter"}
-    %label{:for => "R_filter"}R
-    %input{:type=>"checkbox", :checked => true ,:id => "R_filter"}
-    %label{:for => "NC-17_filter"}NC-17
-    %input{:type=>"checkbox", :checked => true ,:id => "NC-17_filter"}
-    
+    %div{class: "row"}
+      %label{class: "column"} Rating Filter : 
+      %label{:for => "G_filter"}G
+      %input{:type =>"checkbox", :checked => true ,:id => "G_filter"}
+      %label{class: "column",:for => "PG_filter"}PG
+      %input{:type=>"checkbox", :checked => true ,:id => "PG_filter"}
+      %label{:for => "PG-13_filter"}PG-13
+      %input{:type=>"checkbox", :checked => true ,:id => "PG-13_filter"}
+      %label{:for => "R_filter"}R
+      %input{:type=>"checkbox", :checked => true ,:id => "R_filter"}
+      %label{:for => "NC-17_filter"}NC-17
+      %input{:type=>"checkbox", :checked => true ,:id => "NC-17_filter"}
+        
 
+  %tr
+    %th{:style => "width:10%;"} Index
+    %th{:style => "width:30%;"} Movie Title
+    %th{:style => "width:10%;"} Rating
+    %th{:style => "width:20%;"} Release Date
+    %th{:style => "width:30%;"} More Info
     - @movies.each_with_index do |movie,index|
       %tr{class: movie.rating}
         %td= index+1
@@ -39,6 +41,7 @@
         -else
           %td= "-"
         %td= link_to "More about #{movie.title}", movie_path(movie)
+
 %div{class: "row"}      
   %p{class: "column",:style=>"text-align:left;"}= link_to 'Add new movie', new_movie_path
-  %p{class: "column",:style=>"text-align:right;"}= link_to 'delete all movies', all_destroy_path , :method => "post"
+  %p{class: "column",:style=>"text-align:right;"}= link_to 'Delete all movies', all_destroy_path , :method => "post"
