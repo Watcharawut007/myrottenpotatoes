@@ -1,10 +1,13 @@
-%h2 Edit Movie
 
-= form_tag movie_review_path(@movie,@review), :method => :put do
+%div{:id=>"suit"}
+  %h2{:style => 'text-align:center;'}Edit Review
 
-  = label :review, :potatoes, 'Potatoes'
-  = select_tag 'review[potatoes]', options_for_select(1..5)
-  = label :review, :comments, 'Comments'
-  = text_area :review, :comments
+  = form_tag movie_review_path(@movie,@review), :method => :put do
 
-  = submit_tag 'Save Changes'
+    = label :review, :potatoes, 'Potatoes'
+    = select_tag 'review[potatoes]', options_for_select(1..5)
+    = label :review, :comments, 'Comments'
+    = text_area :review, :comments , required: true
+    %br
+    %br
+    = submit_tag 'Save Changes'

@@ -1,14 +1,13 @@
-%h1 All Movies
 
 %h1 Search TMDb for a movie
 
 = form_tag :action => 'search_tmdb' do
-  <label for='search_terms'>Search Terms</label>
-  <input id="search_terms" name="search_terms" type="text" />
+  <input id="search_terms" name="search_terms" type="text" required/>
   = submit_tag 'Search TMDb'
   <br>
+  %h2{:style =>"margin-left:20px;color:rgb(138, 18, 18);font-style: italic;"} Search : #{@search_params}
+  %p{:style => "text-align:left;"}= link_to 'Back to main menu', movies_path
 %div{:style => "text-align:right;"}
-  = link_to 'Back to main menu', movies_path
   = link_to 'Add all movie', create_all_from_tmdb_path(@search_params)
 %table#movies
   %thead

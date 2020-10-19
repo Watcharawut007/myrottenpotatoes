@@ -2,7 +2,7 @@
 %h1 Search TMDb for a movie
 
 = form_tag :action => 'search_tmdb' do
-  <input id="search_terms" name="search_terms" type="text" />
+  <input id="search_terms" name="search_terms" type="text" required/>
   = submit_tag 'Search TMDb'
 
 %h1{:style => "border-bottom: 1px solid DarkSlateGrey;"}All Movies
@@ -13,7 +13,7 @@
   %tbody
     %div{class: "row"}
       %label{class: "column"} Rating Filter : 
-      %label{:for => "G_filter"}G
+      %label{:for => "G_filter" }G 
       %input{:type =>"checkbox", :checked => true ,:id => "G_filter"}
       %label{class: "column",:for => "PG_filter"}PG
       %input{:type=>"checkbox", :checked => true ,:id => "PG_filter"}

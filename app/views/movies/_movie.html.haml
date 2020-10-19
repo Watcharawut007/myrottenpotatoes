@@ -10,7 +10,7 @@
       = @movie.release_date.strftime("%B %d, %Y")
 
 %h3 Description:
-%p#description= @movie.description
+%p{:style => "margin-left:20px;"}=description= @movie.description
 %h3 Reviews:
 = link_to 'Add Review', new_movie_review_path(@movie)
 %ul#details
@@ -25,16 +25,22 @@
   
   - @movie.reviews.each do |review|
     %tr
-      %td name :
-      %td= review.moviegoer.name
-      %td | comments :
-      %tr
-        %td= review.comments
+      %td
+        %div{class:"dialogbox"}
+          %div{class:"body"}
+            %div{class:"message"}
+              %span=review.moviegoer.name
+              %br
+              %span comment :
+              %span= review.comments
+      
         -if @current_user
           -if @current_user.name == review.moviegoer.name
-            = link_to 'Edit review', edit_movie_review_path(@movie,review)
-            = link_to 'Delete review', movie_review_path(@movie,review), :method => :delete
-        
+            %div{:style=> "text-align:right;"}
+              = link_to 'Edit', edit_movie_review_path(@movie,review)
+              = link_to 'Delete', movie_review_path(@movie,review), :method => :delete
+            
+            
         <br>
 
 = link_to 'Edit info', edit_movie_path(@movie)

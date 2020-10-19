@@ -1,6 +1,6 @@
 class ReviewsController < ApplicationController
   skip_before_action :authenticate!, only: [ :new ]
-  before_action :has_moviegoer_and_movie, :only => [:new, :create , :edit, :update , :destroy]
+  before_action :has_moviegoer_and_movie, :only => [ :create , :edit, :update , :destroy]
     
   protected
   def has_moviegoer_and_movie
@@ -17,6 +17,7 @@ class ReviewsController < ApplicationController
   public
   def new
     if set_current_user
+      has_moviegoer_and_movie()
       @review = @movie.reviews.build
     else
       flash[:warning] = "Please log in before create review action"

@@ -1,19 +1,21 @@
-%h2 Create New Movie
 
-= form_tag movies_path, :method => :post do
+%div{:id=>"suit"}
+  %h2{:style => 'text-align:center;'} Create New Movie
 
-  = label :movie, :title, 'Title'
-  = text_field :movie, :title
-  = label :movie, :avatar, "Image"
-  = file_field  :movie,:avatar
-  = label :movie, :rating, 'Rating'
-  = select :movie, :rating, ['G','PG','PG-13','R','NC-17']
+  = form_tag movies_path, :method => :post do
 
-  = label :movie, :release_date, 'Released On'
-  = date_select :movie, :release_date, start_year: 1930
+    = label :movie, :title, 'Title'
+    = text_field :movie, :title , required: true
 
-  = label :movie, :description, 'Description'
-  = text_field :movie, :description
+    = label :movie, :rating, 'Rating' 
+    = select :movie, :rating, ['G','PG','PG-13','R','NC-17']
 
-  = submit_tag 'Save Changes'
-  = link_to 'Cancel', movies_path
+    = label :movie, :release_date, 'Released On'
+    = date_select :movie, :release_date, start_year: 1930
+
+    = label :movie, :description, 'Description'
+    = text_area :movie, :description , required: true
+    %br
+    %br
+    = submit_tag 'Create movie'
+    = link_to 'Cancel', movies_path

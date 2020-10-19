@@ -86,9 +86,10 @@ Bigban {
 #movieInfo {
   padding: 10px;
   position: fixed;
-  border: 2px double #a8d1e8;
-  background: #fee5e0;
+  border: 2px double #483a58;
+  background: #e9e1f3;
   box-shadow: 0 2px 3px #666666;
+
 }
 img{
   height: 200px;
@@ -100,4 +101,48 @@ img{
     hue-rotate(200deg)
     saturate(4)
     brightness(1);
+}
+
+.dialogbox .body {
+  position: relative;
+  max-width: 700px;
+  height: auto;
+  margin: 5px 10px;
+  padding: 5px;
+  background-color: rgba(255, 255, 255, 0.897);
+  border-radius: 3px;
+  border: 5px solid rgba(167, 135, 135, 0.973);
+}
+
+.body .message {
+  min-height: 30px;
+  border-radius: 3px;
+  font-family: Arial;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #797979;
+}
+#suit {
+  width: 280px;
+  margin: auto;
+  padding: 30px;
+  border: 2px double #483a58;
+  background: #e9e1f3;
+  box-shadow: 0 2px 3px #666666;
+}
+#bigsuit {
+  width: 1200px;
+  margin: auto;
+  padding: 30px;
+  border: 2px double #483a58;
+  background: #e9e1f3;
+  box-shadow: 0 2px 3px #666666;
+}
+#midsuit {
+  width: 350px;
+  margin: auto;
+  padding: 30px;
+  border: 2px double #483a58;
+  background: #e9e1f3;
+  box-shadow: 0 2px 3px #666666;
 }
