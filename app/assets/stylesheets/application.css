@@ -51,8 +51,15 @@ table#movies th, table#movies td {
   padding: 4px;
   text-align: left;
 }
-#notice, #warning {
+ #warning {
   background:linear-gradient(90deg,  rgb(231, 61, 61) 35%, rgba(255,255,255,1) 100%);
+  color: white;
+  margin: 1em 0;
+  padding: 4px;
+}
+#notice{
+
+  background:linear-gradient(90deg,  rgb(42, 139, 17) 35%, rgba(255,255,255,1) 100%);
   color: white;
   margin: 1em 0;
   padding: 4px;

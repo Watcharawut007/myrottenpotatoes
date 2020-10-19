@@ -8,15 +8,17 @@
   = submit_tag 'Search TMDb'
   <br>
 = link_to 'Back to main menu', movies_path
+= link_to 'Add all movie', create_all_from_tmdb_path(@search_params)
 %table#movies
   %thead
     %tr
       %th{:style => "width:5%;"} Index
       %th{:style => "width:20%;text-align:center;"} Image
       %th{:style => "width:25%;"} Movie Title
-      %th{:style => "width:15%;"} Average potatoes
-      %th{:style => "width:15%;"} Total vote count
-      %th{:style => "width:20%;"} Release Date
+      %th{:style => "width:10%;"} Average potatoes
+      %th{:style => "width:10%;"} Total vote count
+      %th{:style => "width:10%;"} Release Date
+      %th{:style => "width:20%;"} Add movie
   %tbody
     - @search.each_with_index do |movie,index|
       %tr
@@ -27,5 +29,5 @@
       %td= movie.vote_average/2
       %td= movie.vote_count
       %td= movie.release_date
-      
+      %td= link_to "Add #{movie.title} to movie stock", movies_path(:movie => {:title => movie.title,:release_date => movie.release_date,:description => movie.overview,:rating=>"G"}), :method => :post
 = link_to 'Back to main menu', movies_path

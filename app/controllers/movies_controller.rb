@@ -26,12 +26,18 @@ class MoviesController < ApplicationController
     end
 
     def create
-      params.require(:movie)
-      permitted = params[:movie].permit(:title,:rating,:release_date,:description)
-      @movie = Movie.create!(permitted)
-      @movie.avatar.attach(params[:avatar])
-      flash[:notice] = "#{@movie.title} was successfully created."
-      redirect_to movies_path
+      @para=params.require(:movie)
+      if Movie.exists?(:title => @para[:title],:description => @para[:description]) == false
+        permitted = params[:movie].permit(:title,:rating,:release_date,:description)
+        @movie = Movie.create!(permitted)
+        #@movie.avatar.attach(params[:avatar]
+        flash[:notice] = "#{@movie.title} was successfully created."
+        redirect_to movies_path
+      else
+        @movie= Movie.find_by(:title=> @para[:title])
+        flash[:warning] = "#{@movie.title} was already existed."
+        redirect_to movies_path
+      end
     end
 
     def edit
@@ -74,20 +80,23 @@ class MoviesController < ApplicationController
         redirect_to movies_path
       end
     end
-    def createall_from_movies(search_movie)
-      search_movie.each do |movie|
+    def create_from_search_movies
+      search_params = params.require(:search_movie)
+      @search = Tmdb::Movie.find(search_params)
+      @search.each do |movie|
         if Movie.exists?(:title => movie.title,:description => movie.overview) == false
           permitted = {:title => movie.title,:rating =>"G" ,:release_date =>movie.release_date,:description => movie.overview}
           Movie.create!(permitted)
         end
       end
+      flash[:notice] = "All movies from searching was successfully created."
+      redirect_to movies_path
     end  
 
     def search_tmdb
       @search_params = params[:search_terms]
       @search_params = " " if @search_params  == ""
       @search = Tmdb::Movie.find(@search_params)
-      createall_from_movies(@search)
       if @search != []
         render "search"
       else

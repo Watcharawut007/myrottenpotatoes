@@ -9,7 +9,7 @@ Myrottenpotatoes::Application.routes.draw do
   post 'logout' => 'sessions#destroy'
   get  'auth/failure' => 'sessions#failure'
   get  'auth/twitter', :as => 'login'
-  
   post '/movies/search_tmdb'
   post 'all_destroy' => 'movies#all_destroy' , :as => 'all_destroy'
+  get 'create_all/:search_movie' => 'movies#create_from_search_movies' , :as => 'create_all_from_tmdb'
 end
