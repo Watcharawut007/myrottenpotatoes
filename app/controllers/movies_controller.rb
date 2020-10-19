@@ -33,7 +33,7 @@ class MoviesController < ApplicationController
           @movie = Movie.create!(permitted)
           #@movie.avatar.attach(params[:avatar]
           flash[:notice] = "#{@movie.title} was successfully created."
-          redirect_to movies_path
+          redirect_to movie_path(@movie)
         else
           @movie= Movie.find_by(:title=> @para[:title])
           flash[:warning] = "#{@movie.title} was already existed."
