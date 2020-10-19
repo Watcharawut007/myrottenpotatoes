@@ -1,5 +1,8 @@
 Feature: User can manually add movie
 
+  As a movie fan
+  So that I can add a new movie with title movie and rating
+  
 Scenario: Add a movie
   Given I am on the RottenPotatoes home page
   When I follow "Add new movie"

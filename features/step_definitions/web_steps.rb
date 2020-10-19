@@ -66,7 +66,18 @@ end
 When /^(?:|I )fill in "([^"]*)" for "([^"]*)"$/ do |value, field|
   fill_in(field, :with => value)
 end
-
+Given /I have added "(.*)" with rating "(.*)"/ do |title, rating|
+  steps %Q{
+    Given I am on the RottenPotatoes home page
+    When I follow "Add new movie"
+    Then I should be on the Create New Movie page
+    When I fill in "Title" with "#{title}"
+    And I select "#{rating}" from "Rating"
+    And I press "Save Changes"
+    Then I should be on the RottenPotatoes home page
+    And I should see "#{title}"
+  }
+end
 # Use this to fill in an entire form with data from a table. Example:
 #
 #   When I fill in the following:

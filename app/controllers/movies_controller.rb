@@ -1,5 +1,5 @@
 class MoviesController < ApplicationController
-  skip_before_action :authenticate!, only: [ :show, :index ,:search_tmdb ,:show_tmdb ,:new ,:all_destroy ,:edit ,:destroy]
+  skip_before_action :authenticate!, only: [ :show, :index ,:search_tmdb ,:show_tmdb ,:new ,:all_destroy ,:edit ,:destroy ,:create,:create_from_search_movies]
     def index
       @movies = Movie.all.order('title')
     end
@@ -26,16 +26,21 @@ class MoviesController < ApplicationController
     end
 
     def create
-      @para=params.require(:movie)
-      if Movie.exists?(:title => @para[:title],:description => @para[:description]) == false
-        permitted = params[:movie].permit(:title,:rating,:release_date,:description)
-        @movie = Movie.create!(permitted)
-        #@movie.avatar.attach(params[:avatar]
-        flash[:notice] = "#{@movie.title} was successfully created."
-        redirect_to movies_path
+      if set_current_user
+        @para=params.require(:movie)
+        if Movie.exists?(:title => @para[:title],:description => @para[:description]) == false
+          permitted = params[:movie].permit(:title,:rating,:release_date,:description)
+          @movie = Movie.create!(permitted)
+          #@movie.avatar.attach(params[:avatar]
+          flash[:notice] = "#{@movie.title} was successfully created."
+          redirect_to movies_path
+        else
+          @movie= Movie.find_by(:title=> @para[:title])
+          flash[:warning] = "#{@movie.title} was already existed."
+          redirect_to movies_path
+        end
       else
-        @movie= Movie.find_by(:title=> @para[:title])
-        flash[:warning] = "#{@movie.title} was already existed."
+        flash[:warning] = "Please login before create action."
         redirect_to movies_path
       end
     end
@@ -81,22 +86,28 @@ class MoviesController < ApplicationController
       end
     end
     def create_from_search_movies
-      search_params = params.require(:search_movie)
-      @search = Tmdb::Movie.find(search_params)
-      @search.each do |movie|
-        if Movie.exists?(:title => movie.title,:description => movie.overview) == false
-          permitted = {:title => movie.title,:rating =>"G" ,:release_date =>movie.release_date,:description => movie.overview}
-          Movie.create!(permitted)
+      if set_current_user
+        search_params = params.require(:search_movie)
+        @search = Tmdb::Movie.find(search_params)
+        @search.each do |movie|
+          if Movie.exists?(:title => movie.title,:description => movie.overview) == false
+            permitted = {:title => movie.title,:rating =>"G" ,:release_date =>movie.release_date,:description => movie.overview}
+            Movie.create!(permitted)
+          end
         end
+        flash[:notice] = "All movies from searching was successfully created."
+        redirect_to movies_path
+      else
+        flash[:warning] = "Please login before create action."
+        redirect_to movies_path
       end
-      flash[:notice] = "All movies from searching was successfully created."
-      redirect_to movies_path
     end  
 
     def search_tmdb
       @search_params = params[:search_terms]
       @search_params = " " if @search_params  == ""
       @search = Tmdb::Movie.find(@search_params)
+      #createa_from_movies(@search)
       if @search != []
         render "search"
       else

@@ -22,7 +22,7 @@
       %td= @sum
     -else
       %td No potatoes
-
+  
   - @movie.reviews.each do |review|
     %tr
       %td name :
@@ -30,9 +30,10 @@
       %td | comments :
       %tr
         %td= review.comments
-        -if @current_user.name == review.moviegoer.name
-          = link_to 'Edit review', edit_movie_review_path(@movie,review)
-          = link_to 'Delete review', movie_review_path(@movie,review), :method => :delete
+        -if @current_user
+          -if @current_user.name == review.moviegoer.name
+            = link_to 'Edit review', edit_movie_review_path(@movie,review)
+            = link_to 'Delete review', movie_review_path(@movie,review), :method => :delete
         
         <br>
 
